@@ -1,6 +1,5 @@
 <h2 align="center">
-  <img src="assets/logo.png" alt="Logo" height="54" style="vertical-align: middle; margin-left: 30px; margin-right: 0px; float: left;">
-  <span style="display: inline-block; padding-top: 0px; margin-right: 30px;">
+  <span>
     Unveiling the Mist over 3D Vision-Language Understanding:<br/>Object-centric Evaluation with Chain-of-Analysis
   </span>
 </h2>
@@ -43,7 +42,7 @@ We introduce **Beacon3D**, a novel benchmark and evaluation protocol for 3D visi
 <img src="assets/keypoints.png" width="100%" alt="Keypoints">
 </div>
 
-This repository provides the [test data](#data), [evaluation pipeline](#evaluation), and an up-to-date [leaderboard](#leaderboard) to facilitate research in the 3D-VL community.
+This repository provides the [test data](#data), [evaluation pipeline](#evaluation), and an up-to-date [leaderboard](#leaderboard).
 
 **Note:** The released data has been meticulously refined and may differ from the initial version used in the paper. Please refer to the [leaderboard](#leaderboard) for the latest results. We welcome updates or pull requests for adding the evaluation results of new models to the leaderboard.
 
@@ -64,22 +63,28 @@ This repository provides the [test data](#data), [evaluation pipeline](#evaluati
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | [SceneVerse](https://scene-verse.github.io/) | 73.4 | 65.3 | 61.6 | 73.0 | 73.4 | 51.4 |
 
+### 3RScan
+Coming soon
+
+### MultiScan
+Coming soon
+
 ## Get Started
 
-1. Clone Github repo
+1. Clone Github repo.
 ```shell
 git clone git@github.com:beacon-3d/beacon-3d.git
 cd beacon-3d
 ```
 2. Setup environment. This step can be ignored since the code only involves `numpy`, `openai`, and `tqdm`.
-3. Check out [data](#data) and [evaluation](#evaluation)
+3. Check out [data](#data) and [evaluation](#evaluation).
 
 ## Data
-The test data is organized in the following structure: `data/{domain}`, where `{domain}` includes scannet, 3rscan, and multiscan.
+The test data is in `data/{domain}`, where `{domain}` includes scannet, 3rscan, and multiscan.
 
-**Metadata.** The metadata records grounding chains and grounding-QA chains for each object. Each json is a nested `dict`.
+**Metadata.** The metadata records grounding chains and grounding-QA chains for each object.
 
-**Format process.** For convenience, we provide scripts to convert the metadata into ScanRefer format (for grounding) and ScanQA format (for QA). We also provide the json files after this process (without `metadata` prefix) that are ready to use.
+**Format process.** We provide scripts to convert the metadata into ScanRefer format (for grounding) and ScanQA format (for QA). We also provide the json files after this process (without `metadata` prefix) that are ready to use.
 ```shell
 cd data
 
