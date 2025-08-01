@@ -250,6 +250,9 @@ def main():
             data = json.load(f)
         with open(args.metadata) as f:
             metadata = json.load(f)
+        if data[0]['scene_id'] != infer_results[0]['scene_id']:
+            print("Sort scene")
+            data = sorted(data, key=lambda x: x['scene_id'])
 
         evaluator = LLMEvaluator(model=args.model, region=args.region, prompt_path=args.prompt, verbose=args.verbose)
         logging.getLogger('httpx').setLevel(logging.WARNING)

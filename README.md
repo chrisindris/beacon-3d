@@ -46,12 +46,12 @@ This repository provides the [test data](#data), [evaluation pipeline](#evaluati
 
 **Note:** The released data has been meticulously refined and may differ from the initial version used in the paper. Please refer to the [leaderboard](#leaderboard) for the latest results. We welcome updates or pull requests for adding the evaluation results of new models to the leaderboard.
 
-**Note:** 3RScan and MultiScan data will be released soon. Stay tuned.
-
 ## Leaderboard
+For object-centric models, we use GT object masks by default unless specified.
+We have updated the data for ScanNet, and the ScanNet results here are slightly different from the results in paper.
+Please refer to the table here for the latest ScanNet results.
 
 ### ScanNet: QA
-
 | Model | Class | App. | Geo. | Spa. | Exi. | Overall (Case) | Overall (Obj.) |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | [PQ3D](https://pq3d.github.io/) | 37.8 | 45.8 | 32.1 | 19.2 | 44.5 | 35.9 | 4.2 |
@@ -59,17 +59,44 @@ This repository provides the [test data](#data), [evaluation pipeline](#evaluati
 | [LEO](https://embodied-generalist.github.io/) | 16.4 | 39.8 | 47.6 | 52.8 | 54.3 | 45.2 | 7.5 |
 
 ### ScanNet: Grounding
-
 | Model | Class | App. | Geo. | Spa. | Overall (Case) | Overall (Obj.) |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | [PQ3D](https://pq3d.github.io/) | 74.4 | 75.5 | 62.1 | 76.8 | 74.4 | 60.0 |
 | [SceneVerse](https://scene-verse.github.io/) | 73.4 | 65.3 | 61.6 | 73.0 | 73.4 | 51.4 |
 
-### 3RScan
-Coming soon
+### 3RScan: QA
+| Model | Class | App. | Geo. | Spa. | Exi. | Overall (Case) | Overall (Obj.) |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| [3D-VisTA](https://3d-vista.github.io/) | 15.2 | 24.1 | 28.2 | 25.3 | 28.9 | 25.7 | 3.3 |
+| [PQ3D](https://pq3d.github.io/) | 6.5 | 19.6 | 13.6 | 16.6 | 52.6 | 25.7 | 0.7 |
+| [SceneVerse](https://scene-verse.github.io/) | 28.3 | 32.3 | 34.6 | 38.9 | 44.6 | 37.4 | 0.4 |
+| [LEO](https://embodied-generalist.github.io/) | TODO
+| [GPT-4o](https://openai.com/index/gpt-4o-system-card/) | 34.8 | 38.2 | 40.0 | 45.4 | 60.7 | 46.1 | 11.0 |
 
-### MultiScan
-Coming soon
+### 3RScan: Grounding
+| Model | Class | App. | Geo. | Spa. | Overall (Case) | Overall (Obj.) |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| [ViL3DRel](https://cshizhe.github.io/projects/vil3dref.html) | 41.5 | 44.9 | 37.4 | 37.3 | 41.5 | 18.4 |
+| [3D-VisTA](https://3d-vista.github.io/) | 45.6 | 38.3 | 37.4 | 40.9 | 45.6 | 21.7 |
+| [PQ3D](https://pq3d.github.io/) | 38.3 | 28.0 | 36.4 | 35.3 | 38.3 | 13.6 |
+| [SceneVerse](https://scene-verse.github.io/) | 61.8 | 51.4 | 53.3 | 57.3 | 61.8 | 37.5 |
+
+### MultiScan: QA
+| Model | Class | App. | Geo. | Spa. | Exi. | Overall (Case) | Overall (Obj.) |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| [3D-VisTA](https://3d-vista.github.io/) | 6.5 | 22.6 | 16.7 | 13.2 | 28.8 | 19.1 | 0.0 |
+| [PQ3D](https://pq3d.github.io/) | 21.0 | 16.8 | 16.7 | 9.6 | 39.0 | 20.8 | 0.6 |
+| [SceneVerse](https://scene-verse.github.io/) | 16.2 | 32.1 | 12.5 | 26.5 | 38.1 | 28.9 | 3.1 |
+| [LEO](https://embodied-generalist.github.io/) | TODO
+| [GPT-4o](https://openai.com/index/gpt-4o-system-card/) | 29.0 | 41.6 | 33.3 | 25.7 | 59.3 | 39.4 | 7.6 |
+
+### MultiScan: Grounding
+| Model | Class | App. | Geo. | Spa. | Overall (Case) | Overall (Obj.) |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| [ViL3DRel](https://cshizhe.github.io/projects/vil3dref.html) | 33.2 | 34.4 | 25.0 | 32.0 | 33.2 | 13.2 |
+| [3D-VisTA](https://3d-vista.github.io/) | 40.8 | 30.5 | 28.1 | 38.0 | 40.8 | 18.9 |
+| [PQ3D](https://pq3d.github.io/) | 56.3 | 53.9 | 37.5 | 52.8 | 56.3 | 34.0 |
+| [SceneVerse](https://scene-verse.github.io/) | 59.5 | 54.6 | 53.1 | 56.6 | 59.5 | 35.9 |
 
 ## Get Started
 
