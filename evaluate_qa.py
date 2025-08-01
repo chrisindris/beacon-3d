@@ -43,6 +43,10 @@ def extract_pred(data_dict):
         return data_dict['text']
     elif 'answer_top10' in data_dict:
         return data_dict['answer_top10'][0]
+    elif 'pred_response' in data_dict:
+        return data_dict['pred_response']
+    elif 'pred' in data_dict:
+        return data_dict['pred']
     else:
         raise NotImplementedError()
 
