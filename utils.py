@@ -6,11 +6,14 @@ import openai
 
 def extract_number(text):
     # Using regular expression to find number in text
+    # Used to extract the 1-5 score from the assessor model response
+    # Should the ./data/system_prompt.json be modified to clearly request that only the score should be a digit?
     match = re.search(r"\d+", text)
     return int(match.group(0)) if match else None
 
 
 def is_binary_question(gts):
+    # Check if the ground truth is a yes/no question (true iff the ground truth is 'Yes' or 'No')
     for gt in gts:
         if 'yes' in gt.lower() or 'no' in gt.lower():
             return 1
@@ -55,6 +58,7 @@ def call_openai_api(
     api_key: str = None,
     model: str = 'gpt-4o-2024-08-06',
 ):
+    # wrapper for OpenAI API calls, given the message (which will include ./data/system_prompt.json as well as the question, ground truth and predicted answer.)
     if api_key is None:
         if 'OPENAI_API_KEY' in os.environ:
             openai.api_key = os.environ['OPENAI_API_KEY']
@@ -78,9 +82,9 @@ def call_openai_api(
 def clean_answer(data):
     # from SQA3D
     data = data.lower()
-    data = re.sub('[ ]+$' ,'', data)
-    data = re.sub('^[ ]+' ,'', data)
-    data = re.sub(' {2,}', ' ', data)
+    data = re.sub('[ ]+$' ,'', data) # remove trailing spaces 
+    data = re.sub('^[ ]+' ,'', data) # remove predceeding spaces
+    data = re.sub(' {2,}', ' ', data) # 2+ spaces to 1 space
 
     data = re.sub('\.[ ]{2,}', '. ', data)
     data = re.sub('[^a-zA-Z0-9,\'\s\-:]+', '', data)
@@ -126,10 +130,10 @@ def clean_answer(data):
 
     # misc
     # no1, mat2, etc
-    data = re.sub(r'\b([a-zA-Z]+)([0-9])\b' ,r'\g<1>', data)
-    data = re.sub(r'\ba\b ([a-zA-Z]+)' ,r'\g<1>', data)
-    data = re.sub(r'\ban\b ([a-zA-Z]+)' ,r'\g<1>', data)
-    data = re.sub(r'\bthe\b ([a-zA-Z]+)' ,r'\g<1>', data)
+    data = re.sub(r'\b([a-zA-Z]+)([0-9])\b' ,r'\g<1>', data) # if there are letters immediately followed by a digit, remove the digit 
+    data = re.sub(r'\ba\b ([a-zA-Z]+)' ,r'\g<1>', data) # remove 'a' before a word
+    data = re.sub(r'\ban\b ([a-zA-Z]+)' ,r'\g<1>', data) # remove 'an' before a word
+    data = re.sub(r'\bthe\b ([a-zA-Z]+)' ,r'\g<1>', data) # remove 'the' before a word
 
     data = re.sub(r'\bbackwards\b', 'backward', data)
 
@@ -138,6 +142,8 @@ def clean_answer(data):
 
 def answer_match(pred, gts):
     # return EM and refined EM
+    # EM: if we have an exact match with the ground truth after cleaning 
+    # refined EM: if the prediction (without spaces) is a substring of the ground truth (withou spaces) or vice versa
     for gt in gts:
         if pred == gt:
             return 1, 1
@@ -155,5 +161,6 @@ def extract_question_vicuna(text):
 
 
 def extract_question_qwen(text):
+    # Using regular expression to find text between "<|vision_end|>" and "<|im_end|>"
     match = re.search(r'<\|vision_end\|>(.*?)<\|im_end\|>', text, re.DOTALL)
     return match.group(1) if match else None
