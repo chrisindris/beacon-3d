@@ -2,6 +2,7 @@ import argparse
 import json
 import logging
 import os
+import sys
 
 import numpy as np
 from tqdm import tqdm
@@ -266,7 +267,15 @@ def main():
     output_file = args.output # set the output file path
     if output_file is None:
         output_file = os.path.splitext(args.infer)[0] + '_processed.json'
+        
+    log_file = os.path.splitext(args.infer)[0] + '_log.txt'
+    l = open(log_file, 'w')
+    
+    # Redirect stdout to log file
+    original_stdout = sys.stdout
+    sys.stdout = l
 
+    # if the output file already exists, load it and print the scores for it.
     if os.path.exists(output_file):
         print(f"{output_file} already exists")
         with open(output_file) as f:
@@ -306,6 +315,10 @@ def main():
         with open(args.grounding) as f:
             processed_grounding = json.load(f)
         eval_chain(processed_grounding, processed_qa) # if grounding results are provided, evaluate the chain of grounding and QA results.
+        
+    # Restore original stdout
+    sys.stdout = original_stdout
+    l.close()
 
 
 if __name__ == '__main__':
