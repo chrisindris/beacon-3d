@@ -53,6 +53,10 @@ def extract_pred(data_dict):
         return data_dict['text']
     elif 'answer_top10' in data_dict:
         return data_dict['answer_top10'][0]
+    elif 'pred_response' in data_dict:
+        return data_dict['pred_response']
+    elif 'pred' in data_dict:
+        return data_dict['pred']
     else:
         raise NotImplementedError()
 
@@ -273,6 +277,9 @@ def main():
             data = json.load(f)
         with open(args.metadata) as f:
             metadata = json.load(f)
+        if data[0]['scene_id'] != infer_results[0]['scene_id']:
+            print("Sort scene")
+            data = sorted(data, key=lambda x: x['scene_id'])
 
         evaluator = LLMEvaluator(model=args.model, region=args.region, prompt_path=args.prompt, verbose=args.verbose)
         logging.getLogger('httpx').setLevel(logging.WARNING)
